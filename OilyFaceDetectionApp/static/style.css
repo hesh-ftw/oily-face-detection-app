@@ -1,0 +1,36 @@
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+#file-input {
+    margin-bottom: 10px;
+}
+
+#upload-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#upload-button:hover {
+    background-color: #45a049;
+}
+
+#prediction-result {
+    margin-top: 20px;
+}
+
+#uploaded-image {
+    max-width: 100%;
+    margin-bottom: 10px;
+}

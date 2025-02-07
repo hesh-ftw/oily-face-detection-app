@@ -1,0 +1,394 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <title>Oilyness Prediction App</title>
+</head>
+<body>
+   <h1>Oilyness Prediction</h1>
+   {% if error %}
+       <p class="error">{{ error }}</p>
+   {% endif %}
+   <form action="/predict" method="post" enctype="multipart/form-data">
+       <input type="file" name="image" accept="image/*" required>
+       <button type="submit">Predict</button>
+   </form>
+   {% if predictions %}
+       <div id="predictions">
+           <img src="{{ predictions }}" alt="Predictions">
+       </div>
+   {% endif %}
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- ---------------------------------------------------------------------- -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Oiliness Detection</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Oiliness Detection</h1>
+
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <label for="image">Select Image:</label>
+            <input type="file" name="image" accept="image/*">
+            <br>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if image_path %}
+    <div class="image-container">
+        <div class="image-block">
+            <h2>Original Image</h2>
+            <img src="{{image_path}}" alt="Original Image">
+        </div>
+
+        <div class="image-block">
+            <h2>Predicted Image</h2>
+            <img src="{{output_path}}" alt="Predicted Image">
+        </div>
+    </div>
+{% endif %}
+
+
+        {% if level %}
+            <h2>Oiliness Level: {{ level }}</h2>
+            <h4>Treatments : {{ treatments }}</h4>
+        {% endif %}
+    </div>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oiliness Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Oiliness Prediction</h1>
+        <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
+            <input type="file" id="file-input" name="file" accept="image/*" required>
+            <button type="submit" id="upload-button">Upload Image</button>
+        </form>
+        <div id="prediction-result" style="display: none;">
+            <h2>Prediction Result:</h2>
+            <p>Uploaded Image:</p>
+            <img id="uploaded-image" src="" alt="Uploaded Image">
+            <p>Predicted Label: <span id="predicted-label"></span></p>
+            <p>Confidence Level: <span id="confidence-level"></span>%</p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#upload-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var formData = new FormData($(this)[0]); // Create FormData object
+                $.ajax({
+                    url: '/',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#uploaded-image').attr('src', response.image_url);
+                        $('#predicted-label').text(response.predicted_label);
+                        $('#confidence-level').text(response.confidence_level);
+                        $('#prediction-result').show(); // Show prediction result
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oiliness Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="header">
+    <div class="container">
+        <nav>
+            <!-- <img src="{{ url_for('static', filename='images/a.jpg') }}" class="logo"> -->
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">Oiliness Detection</a></li>
+                <li><a href="#areas"> Common Skin Diseases & Treatments</a></li>
+                <li><a href="#web">Basic Skin Care Routines </a></li>
+                <!-- <li><a href="#contact">Contact</a></li> -->
+                <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    <div class="header-text">
+        <p>Hey,</p>
+        <h1>Measure Your <span>Oiliness </span><br>Level </h1>
+    </div>
+    </div>
+    </div>
+    <div id="about">
+        <div class="container">
+        </p>
+            <!-- <h1 class="sub-title">Oiliness Detection</h1> -->
+          <div class="container">
+        <h1>Upload and check your face oilyness level</h1>
+        <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
+            <input type="file" id="file-input" name="file" accept="image/*" required>
+            <button type="submit" id="upload-button">Upload Image</button>
+        </form>
+        <div id="prediction-result" style="display: none;">
+            <h2>Prediction Result:</h2>
+            <p>Uploaded Image:</p>
+            <img id="uploaded-image" src="" alt="Uploaded Image">
+            <p>Predicted Label: <span id="predicted-label"></span></p>
+            <p>Confidence Level: <span id="confidence-level"></span>%</p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#upload-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var formData = new FormData($(this)[0]); // Create FormData object
+                $.ajax({
+                    url: '/',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#uploaded-image').attr('src', response.image_url);
+                        $('#predicted-label').text(response.predicted_label);
+                        $('#confidence-level').text(response.confidence_level);
+                        $('#prediction-result').show(); // Show prediction result
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+        </div>
+    </div>
+
+
+<div id="areas">
+    <div class="container">
+        <h1 class="sub-title">Common Skin Diseases & Treatments</h1>
+        <!-- <div class="services-list">
+            <div>
+                <i class="fa-regular fa-face-frown-open"></i>
+                <h2>Pimples </h2>
+                <p>A pimple or zit is a kind of comedo that results from excess sebum and dead skin cells getting trapped in the pores of the skin. In its aggravated state, it may evolve into a pustule or papule.Pimples can be treated by acne medications, antibiotics, and anti-inflammatories prescribed by a physician, or various over the counter remedies purchased at a pharmacy.</p>
+                <a href="https://en.wikipedia.org/wiki/Pimple">Learn more...</a>
+            </div>
+            <div>
+                <i class="fa-regular fa-face-sad-cry"></i>
+                <h2>Acne</h2>                    
+                <p>Acne, also known as acne vulgaris, is a long-term skin condition that occurs when dead skin cells and oil from the skin clog hair follicles.Typical features of the condition include blackheads or whiteheads, pimples, oily skin, and possible scarring.It primarily affects skin with a relatively high number of oil glands, including the face, upper part of the chest, and back.The resulting appearance can lead to lack of confidence, anxiety, reduced self-esteem, and, in extreme cases, depression or thoughts of suicide.</p>
+                <a href="https://en.wikipedia.org/wiki/Acne">Learn more...</more></a>
+            </div>
+            <div>
+                <i class="fa-regular fa-face-sad-tear"></i>
+                <h2>Rosacea</h2>
+                <p>Rosacea is a long-term skin condition that typically affects the face.It results in redness, pimples, swelling, and small and superficial dilated blood vessels.Often, the nose, cheeks, forehead, and chin are most involved.A red, enlarged nose may occur in severe disease, a condition known as rhinophyma.Rosacea affects between 1% and 10% of people.Those affected are most often 30 to 50 years old and female.People with paler skin or European ancestry are more frequently affected.</p>
+                <a href="https://en.wikipedia.org/wiki/Rosacea">Learn more...</a>
+            </div>
+            <div>
+                <i class="fa-regular fa-face-frown"></i>
+                <h2>Fordyce spots</h2>
+                <p>Fordyce spots (also termed Fordyce granules) are harmless and painless visible sebaceous glands typically appearing as white/yellow small bumps or spots on the inside of lips or cheeks, gums, or genitalia.They are common,and are present in around 80% of adults.Treatment is generally not required and attempts to remove them typically result in pain and scarring.</p>
+                <a href="https://en.wikipedia.org/wiki/Fordyce_spots">Learn more...</a>
+            </div>
+            
+        </div> -->
+
+        <div class="work-list">
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a16.jpg') }}" class="logo">
+                <div class="layer">
+                    <h2>Pimples</h2>
+                
+                    <!-- <p>A pimple or zit is a kind of comedo that results from excess sebum and dead skin cells getting trapped in the pores of the skin. </p> -->
+                    <a href="https://en.wikipedia.org/wiki/Pimple"><i class="fa-regular fa-face-frown-open"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a12.jpg') }}" class="logo">
+                <div class="layer">
+                    <h2>Acne</h2>
+                    
+                    <!-- <p>Acne, also known as acne vulgaris, is a long-term skin condition that occurs when dead skin cells and oil from the skin clog hair follicles.</p> -->
+                    <a href="https://en.wikipedia.org/wiki/Acne"><i class="fa-regular fa-face-sad-cry"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a15.jpg') }}" class="logo">
+                <div class="layer">
+                    <h2>Rosacea</h2>
+                    
+                    <!-- <p>Rosacea is a long-term skin condition that typically affects the face.It results in redness, pimples, swelling, and small and superficial dilated blood vessels.</p> -->
+                    <a href="https://en.wikipedia.org/wiki/Rosacea"> <i class="fa-regular fa-face-sad-tear"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a17.jpg') }}" class="logo">
+                <div class="layer">
+                    <h2>Fordyce spots</h2>
+                    
+                    <!-- <p>Fordyce spots (also termed Fordyce granules) are harmless and painless visible sebaceous glands typically appearing as white/yellow small bumps or spots on the inside of lips,cheeks or gums.</p> -->
+                    <a href="https://en.wikipedia.org/wiki/Fordyce_spots"><i class="fa-regular fa-face-frown"></i></a>
+                </div>
+            </div>
+           
+
+        </div>
+    </div>
+</div>
+
+
+<div id="web">
+    <div class="container">
+        <h1 class="sub-title">Basic Skin Care Routines</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a6.jpg') }}" class="logo">
+                <div class="layer">
+                    <h3>Lotions</h3>
+                    <h3>(For Low Oily Levels)</h3>
+                    <p>Lotion is a low-viscosity topical preparation intended for application to the skin. By contrast, creams and gels have higher viscosity, typically due to lower water content.Lotions are applied to external skin with bare hands, a brush, a clean cloth, or cotton wool.</p>
+                    <a href="https://en.wikipedia.org/wiki/Lotion"><i class="fa-solid fa-face-smile-beam"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a1.webp') }}" class="logo">
+                <div class="layer">
+                    <h3>Facials</h3>
+                    <h3>(For Middle Oily Levels)</h3>
+                    <p>A facial is a family of skin care treatments for the face, including steam, exfoliation (physical and chemical), extraction, creams, lotions, facial masks, peels, and massage. They are normally performed in beauty salons, but are also a common spa treatment. They are used for general skin health as well as for specific skin conditions. Types of facials include European facial,LED light therapy facials, hydrafacials and mini-facials.</p>
+                    <a href="https://en.wikipedia.org/wiki/Facial"><i class="fa-solid fa-face-smile"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="{{ url_for('static', filename='images/a2.jpg') }}" class="logo">
+                <div class="layer">
+                    <h3>Light therapy</h3>
+                    <h3>(For High Oily Levels)</h3>
+                    <p>Light therapy, also called phototherapy or bright light therapy is the exposure to direct sunlight or artificial light at controlled wavelengths in order to treat a variety of medical disorders, including seasonal affective disorder (SAD), circadian rhythm sleep-wake disorders, cancers, and skin wound infections. Treating skin conditions such as neurodermatitis, psoriasis, acne vulgaris, and eczema with ultraviolet light is called ultraviolet light therapy.</p>
+                    <a href="https://en.wikipedia.org/wiki/Light_therapy"><i class="fa-solid fa-face-smile-wink"></i></a>
+                </div>
+            </div>
+           
+
+        </div>
+        <a href="#header" class="btn">Menu</a>
+    </div>
+</div>
+
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="contact-left">
+                <h1 class=""sub-title>Contact Me</h1>
+                <p><i class="fa-solid fa-paper-plane"></i>oilycheck@gmail.com</p>
+                <p><i class="fa-brands fa-whatsapp"></i><i class="fa-brands fa-telegram"></i>0766850104</p>
+                
+                <a href="images/userguide.pdf" class="btn bt2">Download User Guide</a> 
+            </div> -->
+      
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <div class="end">
+        <p></p>
+     <p>Copyright <i class="fa-solid fa-copyright"></i>2024 All Rights Recerved.</p>
+    </div>
+</div>
+
+
+    <script>
+        var tablinks= document.getElementsByClassName("tab-links");
+        var tabcontents= document.getElementsByClassName("tab-contents");
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab")    
+        }
+
+    </script>
+    <script>
+        var sidemenu=document.getElementById("sidemenu");
+        function openmenu(){
+            sidemenu.style.right="0";
+        }
+        function closemenu(){
+            sidemenu.style.right="-200px";
+        }
+    </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw0IMXPkNP8d51ylAQMI-g0gEbUJfHCDF0SrLp3wx3g_K8uz-E41bc8KtZIAcY7ELgzpA/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg=document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML="Message Sent Successfully"
+                setTimeout(function(){
+                    msg.innerHTML=""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+
+
+</body>
+</html>
